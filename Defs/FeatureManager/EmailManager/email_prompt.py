@@ -26,6 +26,9 @@ def captured_data_email_prompt():
     print("\n{0}[{1}*{0}]{0}DO YOU WANT CAPTURED DATA TO BE EMAILED, THEN CREATE CONFIG FILE -{1}(Y/N)".format(default_palette[0], default_palette[4]))
     choice = input("\n\n{1}{0}YOUR CHOICE >>> {2}".format(default_palette[0], default_palette[4], default_palette[2])).upper()
     if choice == 'Y':
+        #Just create the config file when you prompt or change the following 'w' to 'w+'.
+        with open("emailconfig.py", "w+"):
+            pass
         print("\n{0}[{1}!{0}] BEFORE STARTING MAKE SURE THESE THINGS: \n\n{0}[{1}+{0}] {1}YOU HAVE CORRECT GMAIL USERNAME & PASSWORD\n{0}[{1}+{0}] {1}YOU HAVE DISABLED 2-FACTOR AUTHENTICATION FROM YOUR GMAIL ACCOUNT\n{0}[{1}+{0}] {1}YOU HAVE TURNED ON LESS SECURED APPS \n    (https://myaccount.google.com/lesssecureapps) \n\n".format(default_palette[0], default_palette[4]))
         input('[.] Press Enter To Start Configuring Gmail Credential File...')
         captured_data_email_configuration_prompt()
@@ -72,7 +75,7 @@ def captured_data_email_configuration_prompt():
     with open('Defs/Send_Email/emailconfig.py') as f:
         read_data = f.read()
         c = read_data.replace('GMAILACCOUNT', GMAILACCOUNT)
-        f = open('Defs/Send_Email/emailconfig.py', 'w')
+        f = open('Defs/Send_Email/emailconfig.py', 'w+')
         f.write(c)
         f.close()
         print("{0}[.] {1}Email Address Added To config File. !\n".format(default_palette[0], default_palette[4]))
